@@ -1,5 +1,15 @@
 name: Events Demo 1
-on: ...
+on:
+  pull_request:
+    # # 單獨一個 activity type 寫法
+    # types: opended
+    # # 多個 activity type 寫法
+    # types: [opened, edited]
+    # 條列式的 activity type 寫法
+    types:
+      - opened
+  # workflow_dispatch 沒有 activity types，但是要和其他 events 一起作為觸發條件，仍要寫出來
+  workflow_dispatch:
 jobs:
   deploy:
     runs-on: ubuntu-latest
