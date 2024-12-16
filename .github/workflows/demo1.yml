@@ -8,8 +8,21 @@ on:
     # 條列式的 activity type 寫法
     types:
       - opened
+    branches:
+      - master # 直接指定 branch 名稱
+      - 'dev-*' # 以 dev- 開頭的 branch，例如：dev-new、dev-this-is-new
+      - 'feat/**' # 以 feat/ 開頭的 branch，例如：feat/new、feat/new/button
   # workflow_dispatch 沒有 activity types，但是要和其他 events 一起作為觸發條件，仍要寫出來
   workflow_dispatch:
+  push:
+    # 透過 branches 來限制 workflow 的觸發條件，針對不同的 events，可以使用的 workflow filters 也不同
+    branches:
+      - master # 直接指定 branch 名稱
+      - 'dev-*' # 以 dev- 開頭的 branch，例如：dev-new、dev-this-is-new
+      - 'feat/**' # 以 feat/ 開頭的 branch，例如：feat/new、feat/new/button
+    # 這些特定路徑以外的檔案有變動時，才觸發 workflow
+    paths-ignore:
+      - '.github/workflows/*'
 jobs:
   deploy:
     runs-on: ubuntu-latest
